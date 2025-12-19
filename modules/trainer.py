@@ -229,6 +229,7 @@ class Trainer(BaseTrainer):
         dist.barrier()
         train_loss = 0
         self.model.train()
+        print('train epoch')
         for batch_idx, (images_id, images, reports_ids, reports_masks) in enumerate(tqdm(self.train_dataloader, desc='Training', mininterval=300)):
             images, reports_ids, reports_masks = images.cuda(), reports_ids.cuda(), reports_masks.cuda()
             output = self.model(images, reports_ids,  mode='train')
@@ -238,7 +239,9 @@ class Trainer(BaseTrainer):
             loss.backward()
             torch.nn.utils.clip_grad_value_(self.model.parameters(), 0.1)
             self.optimizer.step()
+
         log = {'train_loss': train_loss / len(self.train_dataloader)}
+        print(log)
         self.lr_scheduler.step()
 
         return log
