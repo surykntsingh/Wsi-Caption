@@ -5,7 +5,7 @@ import os
 
 class Tokenizer(object):
     def __init__(self, args):
-        self.ann_path = '../ocr/datasets/TCGA_BRCA'
+        self.ann_path = self.ann_path
         self.threshold = args.threshold
         #self.dataset_name = args.dataset_name
         self.dataset_name = 'BRCA'
@@ -15,16 +15,29 @@ class Tokenizer(object):
        
         self.token2idx, self.idx2token = self.create_vocabulary()
 
+    def read_json_file(self, json_path):
+        with open(json_path) as f:
+            d = json.load(f)
+        return d
+
     def create_vocabulary(self):
         total_tokens = []
-        root = self.ann_path
-        for dir in os.listdir(root):
-            file_name = os.path.join(root, dir, 'annotation')
+        reports = self.read_json_file(self.ann_path)
 
-            anno = json.loads(open(file_name, 'r').read())
-            tokens = self.clean_report(anno).split()
-            for token in tokens:
-                total_tokens.append(token)
+        for split in reports:
+            for r in split:
+                tokens = self.clean_report(r).split()
+                for token in tokens:
+                    total_tokens.append(token)
+
+
+        # for dir in os.listdir(root):
+        #     file_name = os.path.join(root, dir, 'annotation')
+        #
+        #     anno = json.loads(open(file_name, 'r').read())
+        #     tokens = self.clean_report(anno).split()
+        #     for token in tokens:
+        #         total_tokens.append(token)
 
         counter = Counter(total_tokens)
         vocab = [k for k, v in counter.items() if v >= self.threshold] + ['<unk>']
