@@ -29,6 +29,9 @@ class BaseDataset(Dataset):
         for r in reports:
             img_name = r['id']
             image_path = os.path.join(self.image_dir, f'{img_name}.h5')
+
+            if not os.path.isfile(image_path):
+                continue
             anno = r['report']
             report_ids = tokenizer(anno)
 
@@ -47,9 +50,9 @@ class BaseDataset(Dataset):
         #
         #     anno = json.loads(open(file_name, 'r').read())
         #     report_ids = tokenizer(anno)
-        #     if len(report_ids) < self.max_seq_length:
-        #         padding = [0] * (self.max_seq_length-len(report_ids))
-        #         report_ids.extend(padding)
+            if len(report_ids) < self.max_seq_length:
+                padding = [0] * (self.max_seq_length-len(report_ids))
+                report_ids.extend(padding)
             #report_ids = tokenizer(anno)[:self.max_seq_length]
             self.examples.append({'id':dir, 'image_path': image_path,'report': anno, 'split': self.split,'ids':report_ids, 'mask': [1]*len(report_ids)})
 
