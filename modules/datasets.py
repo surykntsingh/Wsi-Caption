@@ -34,7 +34,7 @@ class BaseDataset(Dataset):
                 continue
 
             #quickfix
-            if image_path=='TCGA-A2-A1G0-01Z-00-DX1.9ECB0B8A-EF4E-45A9-82AC-EF36375DEF65.h5':
+            if image_path =='TCGA-A2-A1G0-01Z-00-DX1.9ECB0B8A-EF4E-45A9-82AC-EF36375DEF65.h5':
                 continue
 
             anno = r['report']
@@ -82,13 +82,15 @@ class TcgaImageDataset(BaseDataset):
         image_path = example['image_path']
         
         # image = torch.load(image_path)
+        try:
+            with h5py.File(image_path, "r") as h5_file:
+                # coords_np = h5_file["coords"][:]
+                embeddings_np = h5_file["features"][:]
 
-        with h5py.File(image_path, "r") as h5_file:
-            # coords_np = h5_file["coords"][:]
-            embeddings_np = h5_file["features"][:]
-
-            # coords = torch.tensor(coords_np).float()
-            image = torch.tensor(embeddings_np)
+                # coords = torch.tensor(coords_np).float()
+                image = torch.tensor(embeddings_np)
+        except Exception as e:
+            print(f'Problem with {image_path},\n {e}')
         image = image[:self.max_fea_length]
         report_ids = example['ids']
         report_masks = example['mask']
