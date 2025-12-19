@@ -23,8 +23,8 @@ def parse_agrs():
     parser = argparse.ArgumentParser()
 
     # Data input settings
-    parser.add_argument('--image_dir', type=str, default='.../pt_files', help='the path to the directory containing the encoded wsi patches.')
-    parser.add_argument('--ann_path', type=str, default='.../TCGA_BRCA', help='the path to the directory containing the data.')
+    parser.add_argument('--image_dir', type=str, default='/mnt/surya/dataset/TCGA_processed/brca_v2/features_conch_v15', help='the path to the directory containing the encoded wsi patches.')
+    parser.add_argument('--ann_path', type=str, default='/mnt/surya/dataset/TCGA_processed/brca_v2/tcga_brca_reports_splits.json', help='the path to the directory containing the data.')
     parser.add_argument('--split_path', type=str, default='../ocr/dataset_csv/splits_0.csv', help='the path to the directory containing the train/val/test splits.')
     
     # Data loader settings
