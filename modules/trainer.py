@@ -52,8 +52,9 @@ class BaseTrainer(object):
 
     def train(self,rank):
         not_improved_count = 0
+        print('starting training')
         for epoch in range(self.start_epoch, self.epochs + 1):
-
+            print(f'epoch: {epoch}')
             self.train_dataloader.sampler.set_epoch(epoch)
             result = self._train_epoch(epoch)
 
