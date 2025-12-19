@@ -34,7 +34,7 @@ class BaseDataset(Dataset):
                 continue
 
             #quickfix
-            if img_name =='TCGA-A2-A1G0-01Z-00-DX1.9ECB0B8A-EF4E-45A9-82AC-EF36375DEF65.h5':
+            if img_name =='TCGA-A2-A1G0-01Z-00-DX1.9ECB0B8A-EF4E-45A9-82AC-EF36375DEF65':
                 continue
 
             anno = r['report']
