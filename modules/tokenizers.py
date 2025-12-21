@@ -27,9 +27,9 @@ class Tokenizer(object):
         for split in reports:
             print(f'split: {split}')
             for r in reports[split]:
-
+                print(f' r:{r}')
                 tokens = self.clean_report(r).split()
-                print(f'tokens: {tokens}, r:{r}')
+                print(f'tokens: {tokens}')
                 for token in tokens:
                     total_tokens.append(token)
 
