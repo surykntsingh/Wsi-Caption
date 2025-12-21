@@ -228,9 +228,9 @@ class Trainer(BaseTrainer):
 
     def _train_epoch(self, rank):
         rank = dist.get_rank()
-        print(f"Rank {rank}: Reaching barrier")
+        # print(f"Rank {rank}: Reaching barrier")
         dist.barrier()
-        print(f"Rank {rank}: Passed barrier")
+        # print(f"Rank {rank}: Passed barrier")
         train_loss = 0
         self.model.train()
 
@@ -245,7 +245,7 @@ class Trainer(BaseTrainer):
             self.optimizer.step()
 
         log = {'train_loss': train_loss / len(self.train_dataloader)}
-        print(log)
+        # print(log)
         self.lr_scheduler.step()
 
         return log

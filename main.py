@@ -188,21 +188,15 @@ def main():
     else:
         trainer.test(local_rank)
 
-
-def main_wrapper(rank, world_size, gpu_ids):
-    # Each rank sees only its own GPU
-    os.environ['CUDA_VISIBLE_DEVICES'] = str(gpu_ids[rank])
-    main()
-
 if __name__ == '__main__':
+    # Only for single-GPU debug mode
     args = parse_agrs()
-    # os.environ['CUDA_VISIBLE_DEVICES'] = args.n_gpu
-    #os.environ['CUDA_VISIBLE_DEVICES'] = '5,6'
-    gpu_ids = [int(x) for x in args.n_gpu.split(',')]
-    n_gpus = len(gpu_ids)
-    world_size = n_gpus
-
-    print(f"Using GPUs: {gpu_ids}, world_size: {world_size}")
-
-    main()
+    if getattr(args, 'debug', False):
+        os.environ['LOCAL_RANK'] = '0'
+        os.environ['RANK'] = '0'
+        os.environ['WORLD_SIZE'] = '1'
+        main()
+    else:
+        # Let torchrun handle everything — just call main()
+        main()
 
