@@ -132,8 +132,8 @@ def main(local_rank, world_size):
     args.lr_ed *= world_size
     
     setup(local_rank, world_size)
-    # if not args.debug:
-    torch.cuda.set_device(local_rank)
+    if not args.debug:
+        torch.cuda.set_device(local_rank)
 
     # fix random seeds
     init_seeds(args.seed+local_rank)
@@ -183,6 +183,11 @@ def main(local_rank, world_size):
         trainer.test(local_rank)
 
 
+def main_wrapper(rank, world_size):
+    # Each rank sees only its own GPU
+    os.environ['CUDA_VISIBLE_DEVICES'] = str(gpu_ids[rank])
+    main(rank, world_size)
+
 if __name__ == '__main__':
     args = parse_agrs()
     # os.environ['CUDA_VISIBLE_DEVICES'] = args.n_gpu
@@ -199,10 +204,7 @@ if __name__ == '__main__':
         main(0, 1)
     else:
         # Critical: restrict visible GPUs per process
-        def main_wrapper(rank, world_size):
-            # Each rank sees only its own GPU
-            os.environ['CUDA_VISIBLE_DEVICES'] = str(gpu_ids[rank])
-            main(rank, world_size)
+
 
 
         mp.spawn(main_wrapper,
