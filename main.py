@@ -107,8 +107,8 @@ def parse_agrs():
 
 def setup(rank, world_size):
     #os.environ['MASTER_ADDR'] = '127.0.0.110'
-    # os.environ['MASTER_ADDR'] = 'localhost'
-    # os.environ['MASTER_PORT'] = '30002'
+    os.environ['MASTER_ADDR'] = 'localhost'
+    os.environ['MASTER_PORT'] = '30001'
     #
     # # initialize the process group
     # dist.init_process_group("nccl", rank=rank, world_size=world_size)
