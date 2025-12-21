@@ -227,11 +227,13 @@ class Trainer(BaseTrainer):
 
 
     def _train_epoch(self, rank):
-        print('train epoch 1')
+        rank = dist.get_rank()
+        print(f"Rank {rank}: Reaching barrier")
         dist.barrier()
+        print(f"Rank {rank}: Passed barrier")
         train_loss = 0
         self.model.train()
-        print('train epoch 2')
+
         for batch_idx, (images_id, images, reports_ids, reports_masks) in enumerate(tqdm(self.train_dataloader, desc='Training', mininterval=300)):
             images, reports_ids, reports_masks = images.cuda(), reports_ids.cuda(), reports_masks.cuda()
             output = self.model(images, reports_ids,  mode='train')
