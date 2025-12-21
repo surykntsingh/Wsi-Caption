@@ -274,6 +274,8 @@ class Trainer(BaseTrainer):
             val_gts, val_res = self.model.module.tokenizer.decode_batch(val_gts_ids[:,1:]), self.model.module.tokenizer.decode_batch(val_res_ids)
             val_met = self.metric_ftns({i: [gt] for i, gt in enumerate(val_gts)},
                                        {i: [re] for i, re in enumerate(val_res)})
+
+            print(f'val_gts: {val_gts}\n val_res: {val_res}')
             log.update(**{'val_' + k: v for k, v in val_met.items()})
         return log
             
