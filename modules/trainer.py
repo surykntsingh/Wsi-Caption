@@ -58,12 +58,12 @@ class BaseTrainer(object):
             self.train_dataloader.sampler.set_epoch(epoch)
             result = self._train_epoch(epoch)
 
-            print(f'result: {result}')
+            # print(f'result: {result}')
 
             best = False
 
             if epoch % self.epochs_val== 0 and epoch>self.start_val : #validation
-                print(f'val , epoch: {epoch} ')
+                # print(f'val , epoch: {epoch} ')
                 val_result = self._val_epoch(rank, result)
                 test_result = self._test_epoch(rank, result)
                 # save logged informations into log dict
@@ -275,7 +275,7 @@ class Trainer(BaseTrainer):
             val_met = self.metric_ftns({i: [gt] for i, gt in enumerate(val_gts)},
                                        {i: [re] for i, re in enumerate(val_res)})
 
-            print(f'val_gts: {val_gts}\n val_res: {val_res}')
+            print(f'val_res: {val_res}')
             log.update(**{'val_' + k: v for k, v in val_met.items()})
         return log
             
