@@ -183,7 +183,7 @@ def main(local_rank, world_size):
         trainer.test(local_rank)
 
 
-def main_wrapper(rank, world_size):
+def main_wrapper(rank, world_size, gpu_ids):
     # Each rank sees only its own GPU
     os.environ['CUDA_VISIBLE_DEVICES'] = str(gpu_ids[rank])
     main(rank, world_size)
@@ -208,6 +208,6 @@ if __name__ == '__main__':
 
 
         mp.spawn(main_wrapper,
-                 args=(world_size,),
+                 args=(world_size,gpu_ids,),
                  nprocs=world_size,
                  join=True)
