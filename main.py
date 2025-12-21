@@ -209,16 +209,5 @@ if __name__ == '__main__':
 
     print(f"Using GPUs: {gpu_ids}, world_size: {world_size}")
 
+    main()
 
-    if args.debug:
-        assert n_gpus==1
-        main(0, 1)
-    else:
-        # Critical: restrict visible GPUs per process
-
-
-
-        mp.spawn(main_wrapper,
-                 args=(world_size,gpu_ids,),
-                 nprocs=world_size,
-                 join=True)
