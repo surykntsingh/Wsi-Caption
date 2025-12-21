@@ -107,8 +107,8 @@ def parse_agrs():
 
 def setup():
     # Let torchrun set these; fallback for safety/debug
-    os.environ['MASTER_ADDR'] = os.environ.get('MASTER_ADDR', 'localhost')
-    os.environ['MASTER_PORT'] = os.environ.get('MASTER_PORT', '30001')  # torchrun will override if you specify --master_port
+    os.environ['MASTER_ADDR'] = '127.0.0.1'  # Force loopback
+    os.environ['MASTER_PORT'] = '30001'  # Or any free port >1024master_port
 
     dist.init_process_group(backend='nccl')
 
