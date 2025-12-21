@@ -113,8 +113,8 @@ def setup(rank, world_size):
     # # initialize the process group
     # dist.init_process_group("nccl", rank=rank, world_size=world_size)
 
-    os.environ['MASTER_ADDR'] = os.environ.get('MASTER_ADDR', 'localhost')
-    os.environ['MASTER_PORT'] = os.environ.get('MASTER_PORT', '30002')
+    # os.environ['MASTER_ADDR'] = os.environ.get('MASTER_ADDR', 'localhost')
+    # os.environ['MASTER_PORT'] = os.environ.get('MASTER_PORT', '30002')
     dist.init_process_group("nccl", rank=rank, world_size=world_size)
 
     
