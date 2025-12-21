@@ -26,7 +26,7 @@ class Tokenizer(object):
         print(f'reports: {reports}')
         for split in reports:
             print(f'split: {split}')
-            for r in reports[split]:
+            for r in reports[split]['report']:
                 print(f' r:{r}')
                 tokens = self.clean_report(r).split()
                 print(f'tokens: {tokens}')
