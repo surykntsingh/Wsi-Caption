@@ -105,17 +105,12 @@ def parse_agrs():
             vars(args)[arg] = False
     return args
 
-def setup(rank, world_size):
-    #os.environ['MASTER_ADDR'] = '127.0.0.110'
-    os.environ['MASTER_ADDR'] = 'localhost'
-    os.environ['MASTER_PORT'] = '30001'
-    #
-    # # initialize the process group
-    # dist.init_process_group("nccl", rank=rank, world_size=world_size)
+def setup():
+    # Let torchrun set these; fallback for safety/debug
+    os.environ['MASTER_ADDR'] = os.environ.get('MASTER_ADDR', 'localhost')
+    os.environ['MASTER_PORT'] = os.environ.get('MASTER_PORT', '30001')  # torchrun will override if you specify --master_port
 
-    # os.environ['MASTER_ADDR'] = os.environ.get('MASTER_ADDR', 'localhost')
-    # os.environ['MASTER_PORT'] = os.environ.get('MASTER_PORT', '30002')
-    dist.init_process_group("nccl", rank=rank, world_size=world_size)
+    dist.init_process_group(backend='nccl')
 
     
 def init_seeds(seed=0, cuda_deterministic=True):
@@ -132,11 +127,20 @@ def init_seeds(seed=0, cuda_deterministic=True):
     
 def main():
     args = parse_agrs()
+
     local_rank = int(os.environ['LOCAL_RANK'])
     world_size = int(os.environ['WORLD_SIZE'])
+    rank = int(os.environ['RANK'])  # Optional, for logging
 
-    # scaling learning rate
-    args.lr_ed *= world_size
+    args.lr_ed *= world_size  # Scaling
+
+    setup()
+    torch.cuda.set_device(local_rank)
+
+    # Add logging to confirm
+    print(f"Rank {rank}/{world_size} (local_rank {local_rank}): Initialized on GPU {local_rank}")
+
+
     
     setup(local_rank, world_size)
     if not args.debug:
