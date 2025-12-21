@@ -30,7 +30,7 @@ class Tokenizer(object):
                 for token in tokens:
                     total_tokens.append(token)
 
-
+        print(f'total_tokens: {total_tokens}')
         # for dir in os.listdir(root):
         #     file_name = os.path.join(root, dir, 'annotation')
         #
