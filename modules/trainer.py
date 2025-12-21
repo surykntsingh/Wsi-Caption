@@ -54,7 +54,7 @@ class BaseTrainer(object):
         not_improved_count = 0
         # print('starting training')
         for epoch in range(self.start_epoch, self.epochs + 1):
-            # print(f'epoch: {epoch}')
+            print(f'epoch: {epoch}')
             self.train_dataloader.sampler.set_epoch(epoch)
             result = self._train_epoch(epoch)
 
@@ -62,7 +62,8 @@ class BaseTrainer(object):
 
             best = False
 
-            if epoch % self.epochs_val== 0 and epoch>self.start_val : #validation 
+            if epoch % self.epochs_val== 0 and epoch>self.start_val : #validation
+                print(f'val , epoch: {epoch} ')
                 val_result = self._val_epoch(rank, result)
                 test_result = self._test_epoch(rank, result)
                 # save logged informations into log dict
@@ -80,6 +81,7 @@ class BaseTrainer(object):
                 if self.mnt_mode != 'off':
                     try:
                         # check whether model performance improved or not, according to specified metric(mnt_metric)
+                        print(f'self.mnt_mode: {self.mnt_mode}')
                         improved = (self.mnt_mode == 'min' and log[self.mnt_metric] <= self.mnt_best) or \
                                    (self.mnt_mode == 'max' and log[self.mnt_metric] >= self.mnt_best)
                     except KeyError:
@@ -100,7 +102,8 @@ class BaseTrainer(object):
                             self.early_stop))
                         break
 
-                    
+            else:
+                print('no val test')
             if epoch % self.save_period == 0 and rank==0:
                 self._save_checkpoint(epoch, save_best=best)
         if rank == 0:
