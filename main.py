@@ -141,11 +141,6 @@ def main():
     print(f"Rank {rank}/{world_size} (local_rank {local_rank}): Initialized on GPU {local_rank}")
 
 
-    
-    setup(local_rank, world_size)
-    if not args.debug:
-        torch.cuda.set_device(local_rank)
-
     # fix random seeds
     init_seeds(args.seed+local_rank)
 
