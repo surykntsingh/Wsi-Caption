@@ -185,7 +185,7 @@ def main(local_rank, world_size):
 
 if __name__ == '__main__':
     args = parse_agrs()
-    os.environ['CUDA_VISIBLE_DEVICES'] = args.n_gpu
+    # os.environ['CUDA_VISIBLE_DEVICES'] = args.n_gpu
     #os.environ['CUDA_VISIBLE_DEVICES'] = '5,6'
     n_gpus = torch.cuda.device_count()
     world_size = n_gpus
