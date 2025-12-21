@@ -25,8 +25,8 @@ class Tokenizer(object):
         reports = self.read_json_file(self.ann_path)
         print(f'reports: {reports}')
         for split in reports:
-            print(f'split: {split}')
-            for r in reports[split]['report']:
+            print(f'split: {split}, reports[split]: {reports[split]}')
+            for r in reports[split]:
                 print(f' r:{r}')
                 tokens = self.clean_report(r).split()
                 print(f'tokens: {tokens}')
