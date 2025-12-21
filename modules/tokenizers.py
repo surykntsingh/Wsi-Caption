@@ -23,10 +23,13 @@ class Tokenizer(object):
     def create_vocabulary(self):
         total_tokens = []
         reports = self.read_json_file(self.ann_path)
-
+        print(f'reports: {reports}')
         for split in reports:
+            print(f'split: {split}')
             for r in split:
+
                 tokens = self.clean_report(r).split()
+                print(f'tokens: {tokens}, r:{r}')
                 for token in tokens:
                     total_tokens.append(token)
 
