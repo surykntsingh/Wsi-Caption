@@ -26,11 +26,9 @@ class BaseDataset(Dataset):
         self.examples = []
         reports = self.read_json_file(self.ann_path)[split]
 
-        # print(reports)
-
         for r in reports:
-            img_name = r['id']
-            image_path = os.path.join(self.image_dir, f'{img_name}')
+            img_name = r['id'].split('.')[0]
+            image_path = os.path.join(self.image_dir, f'{img_name}.h5')
 
             if not os.path.isfile(image_path):
                 continue
@@ -40,7 +38,6 @@ class BaseDataset(Dataset):
                 continue
 
             anno = r['report']
-            print(f'anno: {anno}, split: {split}')
             report_ids = tokenizer(anno)
 
         # for dir in os.listdir(root):
