@@ -102,8 +102,8 @@ class BaseTrainer(object):
                             self.early_stop))
                         break
 
-            else:
-                print('no val test')
+            # else:
+                # print('no val test')
             if epoch % self.save_period == 0 and rank==0:
                 self._save_checkpoint(epoch, save_best=best)
         if rank == 0:
