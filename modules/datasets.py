@@ -26,7 +26,7 @@ class BaseDataset(Dataset):
         self.examples = []
         reports = self.read_json_file(self.ann_path)[split]
 
-        print(reports)
+        # print(reports)
 
         for r in reports:
             img_name = r['id']
@@ -40,7 +40,7 @@ class BaseDataset(Dataset):
                 continue
 
             anno = r['report']
-            print(f'anno: {anno}')
+            print(f'anno: {anno}, split: {split}')
             report_ids = tokenizer(anno)
 
         # for dir in os.listdir(root):
