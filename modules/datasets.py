@@ -28,7 +28,7 @@ class BaseDataset(Dataset):
 
         for r in reports:
             img_name = r['id']
-            image_path = os.path.join(self.image_dir, f'{img_name}.h5')
+            image_path = os.path.join(self.image_dir, f'{img_name}')
 
             if not os.path.isfile(image_path):
                 continue
