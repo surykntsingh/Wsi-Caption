@@ -59,7 +59,7 @@ class BaseDataset(Dataset):
                 padding = [0] * (self.max_seq_length-len(report_ids))
                 report_ids.extend(padding)
             #report_ids = tokenizer(anno)[:self.max_seq_length]
-            self.examples.append({'id':dir, 'image_path': image_path,'report': anno, 'split': self.split,'ids':report_ids, 'mask': [1]*len(report_ids)})
+            self.examples.append({'id':img_name, 'image_path': image_path,'report': anno, 'split': self.split,'ids':report_ids, 'mask': [1]*len(report_ids)})
 
         
         print(f'The size of {self.split} dataset: {len(self.examples)}')
