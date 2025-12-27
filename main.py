@@ -86,7 +86,7 @@ def parse_agrs():
     parser.add_argument('--gamma', type=float, default=0.1, help='the gamma of the learning rate scheduler.')
     
     # debug
-    parser.add_argument("--checkpoint_dir", type=str, default='')
+    parser.add_argument("--checkpoint_dir", type=str, default='results/BRCA')
     parser.add_argument("--mode", type=str, default='Test')
     parser.add_argument("--debug", type=str, default='False')
     parser.add_argument("--local_rank", type=int, default=-1)
