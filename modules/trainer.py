@@ -127,6 +127,7 @@ class BaseTrainer(object):
                 test_res.extend(reports)
                 test_gts.extend(ground_truths)
                 for i in range(len(reports)):
+                    print(images_id[i])
                     with open(os.path.join(self.checkpoint_dir, 'reports', images_id[i]) + '.txt','w') as f:
                         content = {}
                         content['predict'] = reports[i]
