@@ -122,8 +122,8 @@ class BaseTrainer(object):
             for batch_idx, (images_id, images, reports_ids, reports_masks) in enumerate(tqdm(self.test_dataloader)):
                 images, reports_ids, reports_masks = images.cuda(), reports_ids.cuda(), reports_masks.cuda()
                 output = self.model(images, mode='sample')
-                reports = self.model.tokenizer.decode_batch(output.cpu().numpy())
-                ground_truths = self.model.tokenizer.decode_batch(reports_ids[:, 1:].cpu().numpy())
+                reports = self.model.module.tokenizer.decode_batch(output.cpu().numpy())
+                ground_truths = self.model.module.tokenizer.decode_batch(reports_ids[:, 1:].cpu().numpy())
                 test_res.extend(reports)
                 test_gts.extend(ground_truths)
                 for i in range(len(reports)):
