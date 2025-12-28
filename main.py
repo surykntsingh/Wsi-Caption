@@ -106,11 +106,11 @@ def parse_agrs():
             vars(args)[arg] = False
     return args
 
-def setup(n_gpus):
+def setup(gpus):
     # Let torchrun set these; fallback for safety/debug
     os.environ['MASTER_ADDR'] = '127.0.0.1'  # Force loopback
     os.environ['MASTER_PORT'] = '30001'  # Or any free port >1024master_port
-    os.environ['CUDA_VISIBLE_DEVICES'] = n_gpus
+    os.environ['CUDA_VISIBLE_DEVICES'] = gpus
 
     dist.init_process_group(backend='nccl')
 
@@ -136,7 +136,7 @@ def main():
 
     args.lr_ed *= world_size  # Scaling
 
-    setup(args.n_gpus)
+    setup(args.n_gpu)
     torch.cuda.set_device(local_rank)
 
     # Add logging to confirm
