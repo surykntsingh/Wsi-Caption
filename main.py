@@ -28,7 +28,7 @@ def parse_agrs():
     parser.add_argument('--split_path', type=str, default='../ocr/dataset_csv/splits_0.csv', help='the path to the directory containing the train/val/test splits.')
     
     # Data loader settings
-    parser.add_argument('--dataset_name', type=str, default='TCGA', choices=['TCGA',], help='the dataset to be used.')
+    parser.add_argument('--dataset_name', type=str, default='TCGA', choices=['TCGA','HistAI','REG'], help='the dataset to be used.')
     parser.add_argument('--max_fea_length', type=int, default=10000, help='the maximum sequence length of the patch embeddings.')
     parser.add_argument('--max_seq_length', type=int, default=600, help='the maximum sequence length of the reports.')
     parser.add_argument('--threshold', type=int, default=3, help='the cut off frequency for the words.')
@@ -73,7 +73,7 @@ def parse_agrs():
     parser.add_argument('--monitor_mode', type=str, default='max', choices=['min', 'max'], help='whether to max or min the metric.')
     parser.add_argument('--monitor_metric', type=str, default='BLEU_4', help='the metric to be monitored.')
     parser.add_argument('--early_stop', type=int, default=20, help='the patience of training.')
-    parser.add_argument('--dataset_name', type=str, default='TCGA', help='Dataset type')
+    # parser.add_argument('--dataset_name', type=str, default='TCGA', help='Dataset type')
 
     # Optimization
     parser.add_argument('--optim', type=str, default='Adam', help='the type of the optimizer.')
