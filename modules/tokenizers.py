@@ -7,7 +7,7 @@ class Tokenizer(object):
     def __init__(self, args):
         self.ann_path = args.ann_path
         self.threshold = args.threshold
-        #self.dataset_name = args.dataset_name
+        self.dataset_name = args.dataset_name
         # self.dataset_name = 'BRCA'
         if self.dataset_name == 'TCGA':
             self.clean_report = self.clean_report_brca
