@@ -30,8 +30,8 @@ class R2DataLoader(DataLoader):
                 transforms.Normalize((0.485, 0.456, 0.406),
                                      (0.229, 0.224, 0.225))])
 
-        if self.dataset_name == 'TCGA':
-            self.dataset = TcgaImageDataset(self.args, self.tokenizer, self.split, transform=self.transform)
+        # if self.dataset_name == 'TCGA':
+        self.dataset = TcgaImageDataset(self.args, self.tokenizer, self.split, transform=self.transform)
 
             
         if split == 'train':
