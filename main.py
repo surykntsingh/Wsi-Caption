@@ -73,6 +73,7 @@ def parse_agrs():
     parser.add_argument('--monitor_mode', type=str, default='max', choices=['min', 'max'], help='whether to max or min the metric.')
     parser.add_argument('--monitor_metric', type=str, default='BLEU_4', help='the metric to be monitored.')
     parser.add_argument('--early_stop', type=int, default=20, help='the patience of training.')
+    parser.add_argument('--dataset_name', type=str, default='TCGA', help='Dataset type')
 
     # Optimization
     parser.add_argument('--optim', type=str, default='Adam', help='the type of the optimizer.')

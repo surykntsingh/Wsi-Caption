@@ -27,7 +27,7 @@ class BaseDataset(Dataset):
         reports = self.read_json_file(self.ann_path)[split]
 
         for r in reports:
-            img_name = r['id'].split('.')[0]
+            img_name = r['id']
             image_path = os.path.join(self.image_dir, f'{img_name}.h5')
 
             if not os.path.isfile(image_path):
