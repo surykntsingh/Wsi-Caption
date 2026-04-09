@@ -23,12 +23,12 @@ def parse_agrs():
     parser = argparse.ArgumentParser()
 
     # Data input settings
-    parser.add_argument('--image_dir', type=str, default='/mnt/surya/dataset/TCGA_processed/brca_v2/features_conch_v15', help='the path to the directory containing the encoded wsi patches.')
-    parser.add_argument('--ann_path', type=str, default='/mnt/surya/dataset/TCGA_processed/brca_v2/tcga_brca_reports_splits.json', help='the path to the directory containing the data.')
+    parser.add_argument('--image_dir', type=str, default='/lustre/nvwulf/projects/PrasannaGroup-nvwulf/surya/datasets/histai_processed/curated/selected/features_conch_v15', help='the path to the directory containing the encoded wsi patches.')
+    parser.add_argument('--ann_path', type=str, default='/lustre/nvwulf/projects/PrasannaGroup-nvwulf/surya/datasets/histai_processed/curated/histai_reports_splits.json', help='the path to the directory containing the data.')
     parser.add_argument('--split_path', type=str, default='../ocr/dataset_csv/splits_0.csv', help='the path to the directory containing the train/val/test splits.')
     
     # Data loader settings
-    parser.add_argument('--dataset_name', type=str, default='TCGA', choices=['TCGA','HistAI','REG'], help='the dataset to be used.')
+    parser.add_argument('--dataset_name', type=str, default='HistAI', choices=['TCGA','HistAI','REG'], help='the dataset to be used.')
     parser.add_argument('--max_fea_length', type=int, default=10000, help='the maximum sequence length of the patch embeddings.')
     parser.add_argument('--max_seq_length', type=int, default=600, help='the maximum sequence length of the reports.')
     parser.add_argument('--threshold', type=int, default=3, help='the cut off frequency for the words.')
@@ -67,8 +67,8 @@ def parse_agrs():
     parser.add_argument('--epochs', type=int, default=60, help='the number of training epochs.')
     parser.add_argument('--epochs_val', type=int, default=2, help='interval between eval epochs')
     parser.add_argument('--start_val', type=int, default=10, help='start eval epochs')
-    parser.add_argument('--save_dir', type=str, default='results/BRCA', help='the patch to save the models.')
-    parser.add_argument('--record_dir', type=str, default='records/', help='the patch to save the results of experiments')
+    parser.add_argument('--save_dir', type=str, default='results/HistAI/1', help='the patch to save the models.')
+    parser.add_argument('--record_dir', type=str, default='records/HistAI/1', help='the patch to save the results of experiments')
     parser.add_argument('--save_period', type=int, default=1, help='the saving period.')
     parser.add_argument('--monitor_mode', type=str, default='max', choices=['min', 'max'], help='whether to max or min the metric.')
     parser.add_argument('--monitor_metric', type=str, default='BLEU_4', help='the metric to be monitored.')
