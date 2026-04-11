@@ -9,7 +9,7 @@ class Tokenizer(object):
         self.threshold = args.threshold
         self.dataset_name = args.dataset_name
         # self.dataset_name = 'BRCA'
-        if self.dataset_name == 'TCGA':
+        if self.dataset_name == 'TCGA' or self.dataset_name == 'HistAI':
             self.clean_report = self.clean_report_brca
         else:
             self.clean_report = lambda x:x
