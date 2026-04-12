@@ -127,7 +127,7 @@ class BaseTrainer(object):
                 test_res.extend(reports)
                 test_gts.extend(ground_truths)
                 for i in range(len(reports)):
-                    print(images_id[i])
+                    # print(images_id[i])
                     with open(os.path.join(self.checkpoint_dir, 'reports', images_id[i]) + '.txt','w') as f:
                         content = {}
                         content['predict'] = reports[i]
@@ -279,7 +279,7 @@ class Trainer(BaseTrainer):
             val_met = self.metric_ftns({i: [gt] for i, gt in enumerate(val_gts)},
                                        {i: [re] for i, re in enumerate(val_res)})
 
-            print(f'val_res: {val_res}')
+            # print(f'val_res: {val_res}')
             log.update(**{'val_' + k: v for k, v in val_met.items()})
         return log
             

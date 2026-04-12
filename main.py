@@ -30,7 +30,7 @@ def parse_agrs():
     # Data loader settings
     parser.add_argument('--dataset_name', type=str, default='HistAI', choices=['TCGA','HistAI','REG'], help='the dataset to be used.')
     parser.add_argument('--max_fea_length', type=int, default=10000, help='the maximum sequence length of the patch embeddings.')
-    parser.add_argument('--max_seq_length', type=int, default=600, help='the maximum sequence length of the reports.')
+    parser.add_argument('--max_seq_length', type=int, default=1200, help='the maximum sequence length of the reports.')
     parser.add_argument('--threshold', type=int, default=3, help='the cut off frequency for the words.')
     parser.add_argument('--num_workers', type=int, default=2, help='the number of workers for dataloader.')
     parser.add_argument('--batch_size', type=int, default=1, help='the number of samples for a batch.')
@@ -64,11 +64,11 @@ def parse_agrs():
 
     # Trainer settings
     parser.add_argument('--n_gpu', type=str, default='0', help='the  gpus to be used.')
-    parser.add_argument('--epochs', type=int, default=60, help='the number of training epochs.')
+    parser.add_argument('--epochs', type=int, default=100, help='the number of training epochs.')
     parser.add_argument('--epochs_val', type=int, default=2, help='interval between eval epochs')
     parser.add_argument('--start_val', type=int, default=10, help='start eval epochs')
-    parser.add_argument('--save_dir', type=str, default='results/HistAI/1', help='the patch to save the models.')
-    parser.add_argument('--record_dir', type=str, default='records/HistAI/1', help='the patch to save the results of experiments')
+    parser.add_argument('--save_dir', type=str, default='results/HistAI/2', help='the patch to save the models.')
+    parser.add_argument('--record_dir', type=str, default='records/HistAI/2', help='the patch to save the results of experiments')
     parser.add_argument('--save_period', type=int, default=1, help='the saving period.')
     parser.add_argument('--monitor_mode', type=str, default='max', choices=['min', 'max'], help='whether to max or min the metric.')
     parser.add_argument('--monitor_metric', type=str, default='BLEU_4', help='the metric to be monitored.')
@@ -77,7 +77,7 @@ def parse_agrs():
 
     # Optimization
     parser.add_argument('--optim', type=str, default='Adam', help='the type of the optimizer.')
-    parser.add_argument('--lr_ed', type=float, default=1e-4, help='the learning rate for the remaining parameters.')
+    parser.add_argument('--lr_ed', type=float, default=5e-5, help='the learning rate for the remaining parameters.')
     parser.add_argument('--weight_decay', type=float, default=5e-5, help='the weight decay.')
     parser.add_argument('--amsgrad', type=bool, default=True, help='.')
 
