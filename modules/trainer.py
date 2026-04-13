@@ -243,7 +243,7 @@ class Trainer(BaseTrainer):
         train_loss = 0
         self.model.train()
 
-        for batch_idx, (images_id, images, reports_ids, reports_masks) in enumerate(tqdm(self.train_dataloader, desc='Training', mininterval=300)):
+        for batch_idx, (images_id, images, reports_ids, reports_masks) in enumerate(tqdm(self.train_dataloader, desc='Training')):
             images, reports_ids, reports_masks = images.cuda(), reports_ids.cuda(), reports_masks.cuda()
             output = self.model(images, reports_ids,  mode='train')
             loss = self.criterion(output, reports_ids, reports_masks)
@@ -264,7 +264,7 @@ class Trainer(BaseTrainer):
         self.model.eval()
         with torch.no_grad():
             val_gts_ids, val_res_ids = [], []
-            for batch_idx, (images_id, images, reports_ids, reports_masks) in enumerate(tqdm(self.val_dataloader,desc='Validating', mininterval=300)):
+            for batch_idx, (images_id, images, reports_ids, reports_masks) in enumerate(tqdm(self.val_dataloader,desc='Validating')):
                 images, reports_ids, reports_masks = images.cuda(), reports_ids.cuda(), reports_masks.cuda()
                 # print('start eval...')
                 output = self.model(images,  mode='sample')
@@ -288,7 +288,7 @@ class Trainer(BaseTrainer):
         self.model.eval()
         with torch.no_grad():
             test_gts_ids, test_res_ids = [], []
-            for batch_idx, (images_id, images, reports_ids, reports_masks) in enumerate(tqdm(self.test_dataloader,desc='Testing', mininterval=300)):
+            for batch_idx, (images_id, images, reports_ids, reports_masks) in enumerate(tqdm(self.test_dataloader,desc='Testing')):
                 images, reports_ids, reports_masks = images.cuda(), reports_ids.cuda(), reports_masks.cuda()
                 output = self.model(images,  mode='sample')
 
