@@ -167,6 +167,19 @@ def main():
         model.load_state_dict(model_dict)
 
 
+    if args.resume is not None:
+        resume_path = str(args.resume)
+        # print("Loading checkpoint: {} ...".format(resume_path))
+        checkpoint = torch.load(resume_path)['state_dict']
+        # model.load_state_dict(checkpoint['state_dict'])
+        model_dict = model.state_dict()
+        state_dict = {k: v for k, v in checkpoint.items()}
+
+        print(f'model: {(model_dict.keys())}, \n\n\nstate: {(state_dict.keys())}')
+        model_dict.update(state_dict)
+        model.load_state_dict(model_dict)
+
+
     model = DDP(model, device_ids=[local_rank], output_device=local_rank, find_unused_parameters=True)
     
     # build optimizer, learning rate scheduler. set after DDP.
