@@ -77,7 +77,7 @@ def parse_agrs():
 
     # Optimization
     parser.add_argument('--optim', type=str, default='Adam', help='the type of the optimizer.')
-    parser.add_argument('--lr_ed', type=float, default=5e-5, help='the learning rate for the remaining parameters.')
+    parser.add_argument('--lr_ed', type=float, default=1e-4, help='the learning rate for the remaining parameters.')
     parser.add_argument('--weight_decay', type=float, default=5e-5, help='the weight decay.')
     parser.add_argument('--amsgrad', type=bool, default=True, help='.')
 
